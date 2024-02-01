@@ -8,6 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Swing.Admin.AdminAdd;
+import Swing.Admin.AdminDelete;
+import Swing.Admin.AdminDisplay;
+import Swing.Admin.AdminEdit;
 import Swing.Course.CourseAdd;
 import Swing.Course.CourseDlt;
 import Swing.Course.CourseUpdate;
@@ -16,6 +20,10 @@ import Swing.Students.StudentAdd;
 import Swing.Students.StudentDelete;
 import Swing.Students.StudentDisplay;
 import Swing.Students.StudentEdit;
+import Swing.Teachers.TeacherAdd;
+import Swing.Teachers.TeacherDelete;
+import Swing.Teachers.TeacherEdit;
+import Swing.Teachers.TeachersDisplay;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -41,11 +49,14 @@ public class Dashboard extends JFrame {
 	private JTabbedPane tabbedPane;
 	private CoursesDisplay coursesDis;
 	private StudentDisplay studentDis;
+	private TeachersDisplay teacherDis;
+	private AdminDisplay adminDis;
 	
 	//for refreshing
 	private JLabel label_1;
 	private JLabel label_1_1;
 	private JLabel label_1_2;
+	private JLabel label_1_3;
 	
 
 	/**
@@ -75,6 +86,8 @@ public class Dashboard extends JFrame {
 
 	private JTextField txtCources;
 	
+
+	
 	/**
 	 * Create the frame.
 	 */
@@ -97,6 +110,7 @@ public class Dashboard extends JFrame {
                     userData.put("surname", resultSet.getString("surname"));
                     userData.put("email", resultSet.getString("email"));
                     userData.put("role", resultSet.getString("role"));
+                   
                 }
             }
 
@@ -132,6 +146,36 @@ public class Dashboard extends JFrame {
 
 	    return 0; // Return 0 if something went wrong
 	}
+	
+	//to get total courses
+	public class DatabaseOperations {
+
+	    // Your existing database connection parameters
+	    private String url = "jdbc:mysql://localhost:3306/CMS";
+	    private String dbUsername = "root";
+	    private String dbPassword = "";
+
+	    // Method to get the total number of courses
+	    public int getTotalCourseCount() {
+	        String query = "SELECT COUNT(*) FROM courses";
+
+	        try (Connection connection = DriverManager.getConnection(url, dbUsername, dbPassword);
+	             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+	            ResultSet resultSet = preparedStatement.executeQuery();
+
+	            if (resultSet.next()) {
+	                return resultSet.getInt(1);
+	            }
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            
+	        }
+
+	        return 0; // Return 0 if something went wrong
+	    }
+	}
 
 	
 
@@ -145,6 +189,11 @@ public class Dashboard extends JFrame {
 		String surname = userData.get("surname");
 		String email = userData.get("email");
 		String role = userData.get("role");
+		
+		
+		DatabaseOperations databaseOperations = new DatabaseOperations();
+        int totalCourses = databaseOperations.getTotalCourseCount();
+        String totalCourse = String.valueOf(totalCourses);
 
 
         int totalStds = getTotalCount("Student");
@@ -239,14 +288,92 @@ public class Dashboard extends JFrame {
 		label_1_2.setBounds(12, 41, 99, 60);
 		panel_7_2.add(label_1_2);
 		
+		JPanel panel_7_3 = new JPanel();
+		panel_7_3.setLayout(null);
+		panel_7_3.setBackground(new Color(143, 240, 164));
+		panel_7_3.setBounds(23, 227, 130, 113);
+		panel_2.add(panel_7_3);
+		
+		JLabel lblAdmin_1 = new JLabel("Course");
+		lblAdmin_1.setFont(new Font("Dyuthi", Font.BOLD, 22));
+		lblAdmin_1.setBounds(29, 12, 75, 29);
+		panel_7_3.add(lblAdmin_1);
+		
+		JLabel label_1_3 = new JLabel(totalCourse);
+		label_1_3.setFont(new Font("Dialog", Font.BOLD, 44));
+		label_1_3.setBounds(29, 41, 75, 60);
+		panel_7_3.add(label_1_3);
+		
 		JPanel panel_3 = new JPanel();
 		tabbedPane.addTab("Teacher", null, panel_3, null);
 		panel_3.setLayout(null);
+		
 		
 		JLabel lblTab_2_1 = new JLabel("Teacher");
 		lblTab_2_1.setBounds(12, 12, 141, 40);
 		lblTab_2_1.setFont(new Font("Dyuthi", Font.BOLD, 30));
 		panel_3.add(lblTab_2_1);
+		
+		JButton btnRefresh_1_1_2 = new JButton("Refresh");
+		btnRefresh_1_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				teacherDis = new TeachersDisplay();
+				teacherDis.setBounds(12, 176, 468, 331);
+				teacherDis.setVisible(true);
+				panel_3.add(teacherDis);
+				teacherDis.setLayout(null);
+			}
+		});
+		btnRefresh_1_1_2.setBackground(new Color(51, 209, 122));
+		btnRefresh_1_1_2.setBounds(371, 21, 117, 25);
+		panel_3.add(btnRefresh_1_1_2);
+		
+		JLabel lblSearch_1_1 = new JLabel("Search : ");
+		lblSearch_1_1.setFont(new Font("Dyuthi", Font.BOLD, 20));
+		lblSearch_1_1.setBounds(57, 64, 73, 20);
+		panel_3.add(lblSearch_1_1);
+		
+		JButton btnAddTeacher = new JButton("Add Teacher");
+		btnAddTeacher.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TeacherAdd addTeacher = new TeacherAdd();
+				addTeacher.setVisible(true);
+			}
+		});
+		btnAddTeacher.setBackground(new Color(53, 132, 228));
+		btnAddTeacher.setFont(new Font("Dyuthi", Font.BOLD, 12));
+		btnAddTeacher.setBounds(33, 114, 117, 33);
+		panel_3.add(btnAddTeacher);
+		
+		JButton btnEditTeacher = new JButton("Edit Teacher");
+		btnEditTeacher.setBackground(new Color(229, 165, 10));
+		btnEditTeacher.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TeacherEdit editTeacher = new TeacherEdit();
+				editTeacher.setVisible(true);
+			}
+		});
+		btnEditTeacher.setFont(new Font("Dyuthi", Font.BOLD, 12));
+		btnEditTeacher.setBounds(181, 114, 117, 33);
+		panel_3.add(btnEditTeacher);
+		
+		JButton btnDelTeacher = new JButton("Del Teacher");
+		btnDelTeacher.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TeacherDelete deleteTeacher = new TeacherDelete();
+				deleteTeacher.setVisible(true);
+			}
+		});
+		btnDelTeacher.setBackground(new Color(165, 29, 45));
+		btnDelTeacher.setFont(new Font("Dyuthi", Font.BOLD, 12));
+		btnDelTeacher.setBounds(319, 114, 109, 33);
+		panel_3.add(btnDelTeacher);
+		
+		teacherDis = new TeachersDisplay();
+		teacherDis.setBounds(12, 176, 468, 331);
+		teacherDis.setVisible(true);
+		panel_3.add(teacherDis);
+		teacherDis.setLayout(null);
 		
 		JPanel panel_4 = new JPanel();
 		tabbedPane.addTab("Student", null, panel_4, null);
@@ -281,8 +408,12 @@ public class Dashboard extends JFrame {
 //		textField.setColumns(10);
 //		textField.setBounds(131, 77, 316, 30);
 //		panel_4.add(textField);
-//		
+		
+	
+
+	
 		JButton btnAddStudent = new JButton("Add Std");
+		btnAddStudent.setBackground(new Color(53, 132, 228));
 		btnAddStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				StudentAdd addStd = new StudentAdd();
@@ -290,10 +421,11 @@ public class Dashboard extends JFrame {
 			}
 		});
 		btnAddStudent.setFont(new Font("Dyuthi", Font.BOLD, 12));
-		btnAddStudent.setBounds(61, 129, 94, 23);
+		btnAddStudent.setBounds(55, 120, 94, 32);
 		panel_4.add(btnAddStudent);
 		
 		JButton btnEditStd = new JButton("Edit Std");
+		btnEditStd.setBackground(new Color(229, 165, 10));
 		btnEditStd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				StudentEdit editStd = new StudentEdit();
@@ -301,10 +433,11 @@ public class Dashboard extends JFrame {
 			}
 		});
 		btnEditStd.setFont(new Font("Dyuthi", Font.BOLD, 12));
-		btnEditStd.setBounds(173, 129, 93, 23);
+		btnEditStd.setBounds(178, 120, 109, 32);
 		panel_4.add(btnEditStd);
 		
 		JButton btnDltStd = new JButton("Dlt Std");
+		btnDltStd.setBackground(new Color(165, 29, 45));
 		btnDltStd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				StudentDelete dltStudent = new StudentDelete();
@@ -312,14 +445,17 @@ public class Dashboard extends JFrame {
 			}
 		});
 		btnDltStd.setFont(new Font("Dyuthi", Font.BOLD, 12));
-		btnDltStd.setBounds(293, 129, 88, 23);
+		btnDltStd.setBounds(319, 120, 99, 32);
 		panel_4.add(btnDltStd);
+		
+		
 		
 		studentDis = new StudentDisplay();
 		studentDis.setBounds(12, 176, 468, 331);
 		studentDis.setVisible(true);
 		panel_4.add(studentDis);
 		studentDis.setLayout(null);
+		
 		
 		
 		JPanel panel_5 = new JPanel();
@@ -330,6 +466,65 @@ public class Dashboard extends JFrame {
 		lblTab_2_2_1.setBounds(24, 12, 102, 30);
 		lblTab_2_2_1.setFont(new Font("Dyuthi", Font.BOLD, 30));
 		panel_5.add(lblTab_2_2_1);
+		
+		JButton btnRefresh_1_1_1 = new JButton("Refresh");
+		btnRefresh_1_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				adminDis = new AdminDisplay();
+				adminDis.setBounds(12, 176, 468, 331);
+				adminDis.setVisible(true);
+				panel_5.add(adminDis);
+				adminDis.setLayout(null);
+			}
+		});
+		btnRefresh_1_1_1.setBackground(new Color(51, 209, 122));
+		btnRefresh_1_1_1.setBounds(353, 16, 117, 25);
+		panel_5.add(btnRefresh_1_1_1);
+		
+		JButton btnAddStudent_1 = new JButton("Add Admin");
+		btnAddStudent_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AdminAdd addAdmin = new AdminAdd();
+				addAdmin.setVisible(true);
+			}
+		});
+		btnAddStudent_1.setFont(new Font("Dyuthi", Font.BOLD, 12));
+		btnAddStudent_1.setBackground(new Color(53, 132, 228));
+		btnAddStudent_1.setBounds(48, 122, 94, 32);
+		panel_5.add(btnAddStudent_1);
+		
+		JButton btnEditStd_1 = new JButton("Edit Admin");
+		btnEditStd_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AdminEdit editAdmin = new AdminEdit();
+				editAdmin.setVisible(true);
+			}
+		});
+		btnEditStd_1.setFont(new Font("Dyuthi", Font.BOLD, 12));
+		btnEditStd_1.setBackground(new Color(229, 165, 10));
+		btnEditStd_1.setBounds(165, 122, 109, 32);
+		panel_5.add(btnEditStd_1);
+		
+		JButton btnDltStd_1 = new JButton("Dlt Admin");
+		btnDltStd_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AdminDelete deleteAdmin = new AdminDelete();
+				deleteAdmin.setVisible(true);
+			}
+		});
+		btnDltStd_1.setFont(new Font("Dyuthi", Font.BOLD, 12));
+		btnDltStd_1.setBackground(new Color(165, 29, 45));
+		btnDltStd_1.setBounds(302, 122, 99, 32);
+		panel_5.add(btnDltStd_1);
+		
+		adminDis = new AdminDisplay();
+		adminDis.setBounds(12, 176, 468, 331);
+		adminDis.setVisible(true);
+		panel_5.add(adminDis);
+		adminDis.setLayout(null);
+		
+		
+		
 		
 		JPanel panel_6 = new JPanel();
 		tabbedPane.addTab("Course", null, panel_6, null);
@@ -357,28 +552,31 @@ public class Dashboard extends JFrame {
 		txtCources.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Add Course");
-		btnNewButton.setFont(new Font("Dyuthi", Font.BOLD, 12));
+		btnNewButton.setBackground(new Color(53, 132, 228));
+		btnNewButton.setFont(new Font("Dyuthi", Font.BOLD, 14));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CourseAdd addCourse = new CourseAdd();
 				addCourse.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(58, 110, 94, 23);
+		btnNewButton.setBounds(49, 110, 109, 41);
 		panel_6.add(btnNewButton);
 		
 		JButton btnEditCourse = new JButton("Edit Course");
+		btnEditCourse.setBackground(new Color(229, 165, 10));
 		btnEditCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CourseUpdate updateC = new CourseUpdate();
 				updateC.setVisible(true);
 			}
 		});
-		btnEditCourse.setFont(new Font("Dyuthi", Font.BOLD, 12));
-		btnEditCourse.setBounds(206, 110, 93, 23);
+		btnEditCourse.setFont(new Font("Dyuthi", Font.BOLD, 14));
+		btnEditCourse.setBounds(197, 110, 102, 41);
 		panel_6.add(btnEditCourse);
 		
 		JButton btnDltCourse = new JButton("Dlt Course");
+		btnDltCourse.setBackground(new Color(165, 29, 45));
 		btnDltCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CourseDlt deleteC = new CourseDlt();
@@ -389,8 +587,8 @@ public class Dashboard extends JFrame {
 		
 		
 		
-		btnDltCourse.setFont(new Font("Dyuthi", Font.BOLD, 12));
-		btnDltCourse.setBounds(357, 110, 88, 23);
+		btnDltCourse.setFont(new Font("Dyuthi", Font.BOLD, 14));
+		btnDltCourse.setBounds(348, 110, 88, 41);
 		panel_6.add(btnDltCourse);
 		
 		coursesDis = new CoursesDisplay();
@@ -490,6 +688,7 @@ public class Dashboard extends JFrame {
 		        label_1.setText(totalAdmins);
 		        label_1_1.setText(totalTeachers);
 		        label_1_2.setText(totalStudents);
+		        label_1_3.setText(totalCourse);
 
 		        // Repaint the frame
 		        revalidate();
@@ -525,6 +724,45 @@ public class Dashboard extends JFrame {
 		panel_1.setBackground(new Color(119, 118, 123));
 		panel_1.setBounds(701, 0, 163, 582);
 		contentPane.add(panel_1);
+		
+		
+		
+		if ("Admin".equals(role)) {
+		    // students
+		    btnAddStudent.setVisible(true);
+		    btnEditStd.setVisible(true);
+		    btnDltStd.setVisible(true);
+		    //teacher
+		    btnAddTeacher.setVisible(true);
+		    btnEditTeacher.setVisible(true);
+		    btnDelTeacher.setVisible(true);
+		    //admin
+		    btnAddStudent_1.setVisible(true);
+		    btnEditStd_1.setVisible(true);
+		    btnDltStd_1.setVisible(true);
+		    //course
+		    btnNewButton.setVisible(true);
+		    btnEditCourse.setVisible(true);
+		    btnDltCourse.setVisible(true);
+		} else {
+		    
+		    btnAddStudent.setVisible(false);
+		    btnEditStd.setVisible(false);
+		    btnDltStd.setVisible(false);
+		    
+		    btnAddTeacher.setVisible(false);
+		    btnEditTeacher.setVisible(false);
+		    btnDelTeacher.setVisible(false);
+		    
+		    btnAddStudent_1.setVisible(false);
+		    btnEditStd_1.setVisible(false);
+		    btnDltStd_1.setVisible(false);
+		    
+		    btnNewButton.setVisible(false);
+		    btnEditCourse.setVisible(false);
+		    btnDltCourse.setVisible(false);
+		}
+		
 		
 		
 	}
