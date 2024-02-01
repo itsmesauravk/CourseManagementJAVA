@@ -28,7 +28,6 @@ public class Dashboard extends JFrame {
 	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
 	private CoursesDisplay coursesDis;
-	private DeleteCourse dltCourse;
 	
 
 	/**
@@ -192,6 +191,8 @@ public class Dashboard extends JFrame {
 		btnNewButton.setFont(new Font("Dyuthi", Font.BOLD, 12));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CourseAdd addCourse = new CourseAdd();
+				addCourse.setVisible(true);
 			}
 		});
 		btnNewButton.setBounds(58, 110, 94, 23);
@@ -200,6 +201,8 @@ public class Dashboard extends JFrame {
 		JButton btnEditCourse = new JButton("Edit Course");
 		btnEditCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CourseUpdate updateC = new CourseUpdate();
+				updateC.setVisible(true);
 			}
 		});
 		btnEditCourse.setFont(new Font("Dyuthi", Font.BOLD, 12));
@@ -209,18 +212,12 @@ public class Dashboard extends JFrame {
 		JButton btnDltCourse = new JButton("Dlt Course");
 		btnDltCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				coursesDis.setVisible(false);
-				
-				dltCourse.setVisible(true);
-				
+				CourseDlt deleteC = new CourseDlt();
+				deleteC.setVisible(true);			
 				
 			}
 		});
 		
-		dltCourse = new DeleteCourse();
-		dltCourse.setBounds(29,173, 453,331);
-		panel_6.add(dltCourse);
-		dltCourse.setVisible(false);
 		
 		
 		btnDltCourse.setFont(new Font("Dyuthi", Font.BOLD, 12));
@@ -228,9 +225,24 @@ public class Dashboard extends JFrame {
 		panel_6.add(btnDltCourse);
 		
 		coursesDis = new CoursesDisplay();
-		coursesDis.setBounds(29, 173, 453, 331);
+		coursesDis.setBounds(12, 176, 468, 331);
 		coursesDis.setVisible(true);
 		panel_6.add(coursesDis);
+		coursesDis.setLayout(null);
+		
+		JButton btnRefresh_1 = new JButton("Refresh");
+		btnRefresh_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				coursesDis = new CoursesDisplay();
+				coursesDis.setBounds(12, 176, 468, 331);
+				coursesDis.setVisible(true);
+				panel_6.add(coursesDis);
+				coursesDis.setLayout(null);
+			}
+		});
+		btnRefresh_1.setBackground(new Color(51, 209, 122));
+		btnRefresh_1.setBounds(382, 16, 117, 25);
+		panel_6.add(btnRefresh_1);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(119, 118, 123));

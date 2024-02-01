@@ -16,7 +16,8 @@ public class CoursesDisplay extends JPanel {
     private JTable table;
 
     public CoursesDisplay() {
-        setLayout(new BorderLayout());
+//        setLayout(new BorderLayout());
+        setLayout(null);
 
         // Getting the data
         DefaultTableModel model = new DefaultTableModel();
@@ -47,7 +48,9 @@ public class CoursesDisplay extends JPanel {
         }
 
         JScrollPane scrollPane = new JScrollPane();
-        add(scrollPane, BorderLayout.CENTER);
+        // Set the bounds for the JScrollPane explicitly
+        scrollPane.setBounds(0, 0, 465, 311);
+        add(scrollPane);
 
         table = new JTable(model);
         scrollPane.setViewportView(table);
