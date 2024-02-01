@@ -1,6 +1,6 @@
 // CoursesDisplay.java
 
-package Swing;
+package Swing.Course;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

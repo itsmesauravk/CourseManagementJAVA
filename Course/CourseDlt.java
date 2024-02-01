@@ -1,4 +1,4 @@
-package Swing;
+package Swing.Course;
 
 import java.awt.EventQueue;
 
@@ -108,10 +108,10 @@ public class CourseDlt extends JFrame {
 			        }
 			}
 		});
-		btnNewButton.setForeground(new Color(192, 191, 188));
+		btnNewButton.setForeground(new Color(0, 0, 0));
 		btnNewButton.setBackground(new Color(165, 29, 45));
 		btnNewButton.setFont(new Font("Dyuthi", Font.BOLD, 18));
-		btnNewButton.setBounds(133, 175, 117, 25);
+		btnNewButton.setBounds(75, 196, 117, 25);
 		contentPane.add(btnNewButton);
 		
 		JLabel lblCourseId = new JLabel("Course ID :");
@@ -130,10 +130,10 @@ public class CourseDlt extends JFrame {
 				dispose();
 			}
 		});
-		btnReturn.setForeground(new Color(192, 191, 188));
+		btnReturn.setForeground(new Color(0, 0, 0));
 		btnReturn.setFont(new Font("Dyuthi", Font.BOLD, 18));
 		btnReturn.setBackground(new Color(38, 162, 105));
-		btnReturn.setBounds(133, 233, 117, 25);
+		btnReturn.setBounds(210, 196, 117, 25);
 		contentPane.add(btnReturn);
 	}
 }
