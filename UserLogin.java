@@ -25,7 +25,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Login extends JFrame {
+public class UserLogin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -39,7 +39,7 @@ public class Login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login frame = new Login();
+					UserLogin frame = new UserLogin();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -81,43 +81,43 @@ public class Login extends JFrame {
 	}
 	
 	
-	public Login() {
+	public UserLogin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 745, 518);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(150, 233, 198));
+		contentPane.setBackground(new Color(246, 245, 244));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblLogin = new JLabel("Login ");
-		lblLogin.setBounds(227, 31, 118, 35);
+		lblLogin.setBounds(266, 12, 118, 35);
 		lblLogin.setFont(new Font("Dyuthi", Font.BOLD, 30));
 		contentPane.add(lblLogin);
 		
 		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setBounds(196, 88, 88, 35);
+		lblEmail.setBounds(166, 127, 88, 35);
 		lblEmail.setFont(new Font("Dyuthi", Font.BOLD, 20));
 		contentPane.add(lblEmail);
 		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(196, 172, 88, 35);
+		lblPassword.setBounds(166, 184, 88, 35);
 		lblPassword.setFont(new Font("Dyuthi", Font.BOLD, 20));
 		contentPane.add(lblPassword);
 		
 		emailField = new JTextField();
-		emailField.setBounds(196, 128, 210, 32);
+		emailField.setBounds(266, 128, 210, 32);
 		emailField.setBackground(new Color(255, 255, 255));
 		contentPane.add(emailField);
 		emailField.setColumns(10);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(196, 203, 210, 32);
+		passwordField.setBounds(266, 185, 210, 32);
 		contentPane.add(passwordField);
 		
 		JButton btnLogin = new JButton("Login");
-		btnLogin.setBounds(228, 266, 117, 35);
+		btnLogin.setBounds(227, 265, 117, 35);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String emailLogin = emailField.getText();
@@ -146,7 +146,7 @@ public class Login extends JFrame {
 		btnNewButton.setBounds(228, 349, 117, 25);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Registration newReg = new Registration();  //creating obj this will redirect to Registration page
+				Register newReg = new Register();  //creating obj this will redirect to Registration page
 				newReg.setVisible(true);
 				dispose(); 
 				//dispose will remove unused tab

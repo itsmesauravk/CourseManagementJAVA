@@ -28,6 +28,7 @@ public class Dashboard extends JFrame {
 	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
 	private CoursesDisplay coursesDis;
+	private DeleteCourse dltCourse;
 	
 
 	/**
@@ -55,59 +56,52 @@ public class Dashboard extends JFrame {
 		});
 	}
 
-	String fn;
 	private JTextField txtCources;
 	
 	/**
 	 * Create the frame.
 	 */
+	
+	String url = "jdbc:mysql://localhost:3306/CMS";
+	String dbUsername = "root";
+	String dbPassword = "";
 	// fetching the data from sql database
-	public void getUserData(String userEmail) {
-		String url = "jdbc:mysql://localhost:3306/CMS";
-        String dbUsername = "root";
-        String dbPassword = "";
-        
-        try (Connection connection = DriverManager.getConnection(url, dbUsername, dbPassword);
-                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE email = ?")) {
+	String userName;
+	
+	public String getUserData(String userEmail) {
+//	    String[] userData = new String[4];
+	    try (Connection connection = DriverManager.getConnection(url, dbUsername, dbPassword);
+	            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE email = ?")) {
 
-               preparedStatement.setString(1, userEmail);
-               
+	        preparedStatement.setString(1, userEmail);
 
-               try (ResultSet resultSet = preparedStatement.executeQuery()) {
-            	   if(resultSet.next()) {
-            		// getting data from the result set
-                       fn = resultSet.getString("firstname");
-                       String surname = resultSet.getString("surname");
-                       String email = resultSet.getString("email");
-                       String role = resultSet.getString("role");
-                       
-                       System.out.println(String.format("%s, %s, %s, %s", fn, surname, email, role));
+	        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+	            if (resultSet.next()) {
+	                // Getting data from the result set
+	                userName = resultSet.getString("firstname");
+	                String surname = resultSet.getString("surname");
+	                String email = resultSet.getString("email");
+	                String role = resultSet.getString("role");
 
-//                       return new UserData(firstname,surname,email,role);
-            	   }
-               }
+	                return userName;
+	            }
+	        }
 
-           } catch (SQLException e) {
-               e.printStackTrace();
-               
-           }
-        // If did not get the user data, return null
-//        return null;
-        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return userName;
 	}
 	
 
-	
-	
+
 	public Dashboard(String userEmail) {
 		
 		this.userEmail = userEmail;
-		
-//		this.userData = getUserData(userEmail);
-		
+
+        String firstname = getUserData(userEmail);
 		
 
-		
 		setBackground(new Color(94, 92, 100));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 886, 624);
@@ -132,9 +126,15 @@ public class Dashboard extends JFrame {
 		lblTab_2.setBounds(12, 0, 187, 53);
 		panel_2.add(lblTab_2);
 		
-		JLabel lblNewLabel = new JLabel("Welcome, "+userEmail);
-		lblNewLabel.setBounds(198, 20, 194, 15);
+		JLabel lblNewLabel = new JLabel(firstname);
+		lblNewLabel.setForeground(new Color(46, 194, 126));
+		lblNewLabel.setFont(new Font("Dyuthi", Font.BOLD, 24));
+		lblNewLabel.setBounds(369, 11, 130, 33);
 		panel_2.add(lblNewLabel);
+		
+		JLabel lblWelcome = new JLabel("Welcome,");
+		lblWelcome.setBounds(297, 20, 70, 15);
+		panel_2.add(lblWelcome);
 		
 		JPanel panel_3 = new JPanel();
 		tabbedPane.addTab("Teacher", null, panel_3, null);
@@ -207,12 +207,29 @@ public class Dashboard extends JFrame {
 		panel_6.add(btnEditCourse);
 		
 		JButton btnDltCourse = new JButton("Dlt Course");
+		btnDltCourse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				coursesDis.setVisible(false);
+				
+				dltCourse.setVisible(true);
+				
+				
+			}
+		});
+		
+		dltCourse = new DeleteCourse();
+		dltCourse.setBounds(29,173, 453,331);
+		panel_6.add(dltCourse);
+		dltCourse.setVisible(false);
+		
+		
 		btnDltCourse.setFont(new Font("Dyuthi", Font.BOLD, 12));
 		btnDltCourse.setBounds(357, 110, 88, 23);
 		panel_6.add(btnDltCourse);
 		
 		coursesDis = new CoursesDisplay();
 		coursesDis.setBounds(29, 173, 453, 331);
+		coursesDis.setVisible(true);
 		panel_6.add(coursesDis);
 		
 		JPanel panel = new JPanel();
@@ -268,7 +285,7 @@ public class Dashboard extends JFrame {
 		JButton btnLogOut = new JButton("Log Out");
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login lgn = new Login();
+				UserLogin lgn = new UserLogin();
 				lgn.setVisible(true);
 				dispose();
 			}
