@@ -48,6 +48,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
+import javax.swing.JPasswordField;
 
 public class Dashboard extends JFrame {
 
@@ -102,6 +104,11 @@ public class Dashboard extends JFrame {
 	String url = "jdbc:mysql://localhost:3306/CMS";
     String dbUsername = "root";
     String dbPassword = "";
+    private JTextField fnameS;
+    private JTextField surnameS;
+    private JTextField emailS;
+    private JPasswordField oldpasswordS;
+    private JPasswordField newpasswordS;
 	
 	public Map<String, String> getUserData(String userEmail) {
         Map<String, String> userData = new HashMap<>();
@@ -117,6 +124,7 @@ public class Dashboard extends JFrame {
                     userData.put("firstname", resultSet.getString("firstname"));
                     userData.put("surname", resultSet.getString("surname"));
                     userData.put("email", resultSet.getString("email"));
+                    userData.put("password", resultSet.getString("password"));
                     userData.put("role", resultSet.getString("role"));
                    
                 }
@@ -185,7 +193,45 @@ public class Dashboard extends JFrame {
 	    }
 	}
 
-	
+	// for setting
+	public int updateUserData(String oldEmail, String newFirstName, String newSurname, String newEmail, String newPassword) {
+	    String url = "jdbc:mysql://localhost:3306/CMS";
+	    String dbUsername = "root";
+	    String dbPassword = "";
+
+	    String query = "UPDATE users SET firstname = ?, surname = ?, email = ?, password = ? WHERE  email = ?";
+
+	    try (Connection connection = DriverManager.getConnection(url, dbUsername, dbPassword);
+	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+	        preparedStatement.setString(1, newFirstName);
+	        preparedStatement.setString(2, newSurname);
+	        preparedStatement.setString(3, newEmail);
+	        preparedStatement.setString(4, newPassword);
+	        preparedStatement.setString(5, oldEmail);
+
+	        int rowsAffected = preparedStatement.executeUpdate();
+
+	        if (rowsAffected > 0) {
+	            // Display success message
+	            JOptionPane.showMessageDialog(null,"Profile updated successfully. Please re-login !!");
+	            UserLogin logIn = new UserLogin();
+	            logIn.setVisible(true);
+	            dispose();
+	        }else {
+	        	JOptionPane.showMessageDialog(null,"Failed to update profile !!");
+	        }
+
+	        return rowsAffected;
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        // Handle the exception as needed
+	    }
+
+	    return 0; // Return 0 if something went wrong
+	}
+
 
 
 	public Dashboard(String userEmail) {
@@ -197,6 +243,7 @@ public class Dashboard extends JFrame {
 		String surname = userData.get("surname");
 		String email = userData.get("email");
 		String role = userData.get("role");
+		String passw = userData.get("password");
 		
 		
 		DatabaseOperations databaseOperations = new DatabaseOperations();
@@ -620,7 +667,7 @@ public class Dashboard extends JFrame {
 		panel_6.add(btnRefresh_1);
 		
 		JPanel panel_8 = new JPanel();
-		tabbedPane.addTab("Std Progress", null, panel_8, null);
+		tabbedPane.addTab("Std ", null, panel_8, null);
 		panel_8.setLayout(null);
 		
 		JLabel lblStudentProgress = new JLabel("Student Progress");
@@ -673,58 +720,235 @@ public class Dashboard extends JFrame {
 		btnRefresh_2.setBounds(363, 31, 117, 25);
 		panel_8.add(btnRefresh_2);
 		
+		JPanel panel_9 = new JPanel();
+		tabbedPane.addTab("Setting", null, panel_9, null);
+		panel_9.setLayout(null);
+		
+		JLabel label_2 = new JLabel("----------------------------------------------------------------------------------------------");
+		label_2.setBounds(12, 41, 487, 15);
+		panel_9.add(label_2);
+		
+		JLabel label_2_1 = new JLabel("----------------------------------------------------------------------------------------------");
+		label_2_1.setBounds(12, 421, 487, 15);
+		panel_9.add(label_2_1);
+		
+		JLabel lblSetting = new JLabel("Setting");
+		lblSetting.setBounds(12, 12, 184, 37);
+		lblSetting.setFont(new Font("Dyuthi", Font.BOLD, 28));
+		panel_9.add(lblSetting);
+		
+		JLabel lblHelpServices = new JLabel("Help & Services :");
+		lblHelpServices.setBounds(12, 443, 125, 15);
+		lblHelpServices.setFont(new Font("Dyuthi", Font.BOLD, 16));
+		panel_9.add(lblHelpServices);
+		
+		JLabel lblReportTechnicalIssue = new JLabel("Report technical issue ?");
+		lblReportTechnicalIssue.setBounds(12, 470, 172, 15);
+		lblReportTechnicalIssue.setForeground(new Color(165, 29, 45));
+		lblReportTechnicalIssue.setFont(new Font("Dyuthi", Font.BOLD, 14));
+		panel_9.add(lblReportTechnicalIssue);
+		
+		JLabel lblUserManual = new JLabel("User manual ?");
+		lblUserManual.setBounds(12, 484, 172, 15);
+		lblUserManual.setForeground(new Color(38, 162, 105));
+		lblUserManual.setFont(new Font("Dyuthi", Font.BOLD, 14));
+		panel_9.add(lblUserManual);
+		
+		JLabel lblReportUser = new JLabel("Report user ?");
+		lblReportUser.setBounds(12, 497, 172, 15);
+		lblReportUser.setForeground(new Color(198, 70, 0));
+		lblReportUser.setFont(new Font("Dyuthi", Font.BOLD, 14));
+		panel_9.add(lblReportUser);
+		
+		JLabel lblTermsConditions = new JLabel("Terms & Conditions");
+		lblTermsConditions.setBounds(290, 448, 153, 15);
+		lblTermsConditions.setForeground(new Color(94, 92, 100));
+		lblTermsConditions.setFont(new Font("Dyuthi", Font.BOLD, 16));
+		panel_9.add(lblTermsConditions);
+		
+		JLabel lblContact = new JLabel("Contact :");
+		lblContact.setBounds(290, 469, 153, 15);
+		lblContact.setFont(new Font("Dyuthi", Font.BOLD, 16));
+		panel_9.add(lblContact);
+		
+		JLabel label_3 = new JLabel("");
+		label_3.setBounds(336, 482, 70, 15);
+		panel_9.add(label_3);
+		
+		JLabel lblHeraldcollegekathmanducom = new JLabel("heraldcollege@kathmandu.com");
+		lblHeraldcollegekathmanducom.setBounds(290, 484, 187, 15);
+		lblHeraldcollegekathmanducom.setForeground(new Color(38, 162, 105));
+		lblHeraldcollegekathmanducom.setFont(new Font("Dyuthi", Font.BOLD, 14));
+		panel_9.add(lblHeraldcollegekathmanducom);
+		
+		JLabel lblTel = new JLabel("Tel :    01-123908");
+		lblTel.setBounds(290, 497, 172, 15);
+		lblTel.setForeground(new Color(38, 162, 105));
+		lblTel.setFont(new Font("Dyuthi", Font.BOLD, 14));
+		panel_9.add(lblTel);
+		
+		JLabel lblGeneral = new JLabel("General ");
+		lblGeneral.setBounds(12, 61, 82, 27);
+		lblGeneral.setFont(new Font("Dyuthi", Font.BOLD, 18));
+		lblGeneral.setForeground(new Color(94, 92, 100));
+		panel_9.add(lblGeneral);
+		
+		JLabel lblFirstname = new JLabel("Firstname  :");
+		lblFirstname.setBounds(12, 97, 106, 21);
+		lblFirstname.setFont(new Font("Dyuthi", Font.BOLD, 20));
+		panel_9.add(lblFirstname);
+		
+		JLabel lblSurname = new JLabel("Surname  :");
+		lblSurname.setBounds(12, 130, 106, 21);
+		lblSurname.setFont(new Font("Dyuthi", Font.BOLD, 20));
+		panel_9.add(lblSurname);
+		
+		JLabel lblEmail = new JLabel("Email  :");
+		lblEmail.setBounds(12, 163, 106, 21);
+		lblEmail.setFont(new Font("Dyuthi", Font.BOLD, 20));
+		panel_9.add(lblEmail);
+		
+		fnameS = new JTextField();
+		fnameS.setBounds(136, 97, 257, 27);
+		panel_9.add(fnameS);
+		fnameS.setColumns(10);
+		
+		surnameS = new JTextField();
+		surnameS.setBounds(136, 130, 257, 27);
+		surnameS.setColumns(10);
+		panel_9.add(surnameS);
+		
+		emailS = new JTextField();
+		emailS.setBounds(136, 163, 257, 27);
+		emailS.setColumns(10);
+		panel_9.add(emailS);
+		
+		JLabel lblSecurity = new JLabel("Security");
+		lblSecurity.setBounds(12, 215, 82, 27);
+		lblSecurity.setForeground(new Color(94, 92, 100));
+		lblSecurity.setFont(new Font("Dyuthi", Font.BOLD, 18));
+		panel_9.add(lblSecurity);
+		
+		JLabel lblOldPassword = new JLabel("Old Password  :");
+		lblOldPassword.setBounds(12, 254, 153, 21);
+		lblOldPassword.setFont(new Font("Dyuthi", Font.BOLD, 20));
+		panel_9.add(lblOldPassword);
+		
+		JLabel lblNewPassword = new JLabel("New Password  :");
+		lblNewPassword.setBounds(12, 323, 153, 21);
+		lblNewPassword.setFont(new Font("Dyuthi", Font.BOLD, 20));
+		panel_9.add(lblNewPassword);
+		
+		oldpasswordS = new JPasswordField();
+		oldpasswordS.setBounds(12, 274, 244, 27);
+		panel_9.add(oldpasswordS);
+		
+		newpasswordS = new JPasswordField();
+		newpasswordS.setBounds(12, 344, 244, 27);
+		panel_9.add(newpasswordS);
+		
+		JButton btnUpdateProfile = new JButton("Update Profile");
+		btnUpdateProfile.setBounds(194, 384, 136, 27);
+		btnUpdateProfile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String fname = fnameS.getText();
+				String surname = surnameS.getText();
+				String eMail = emailS.getText();
+				String oldpass = oldpasswordS.getText();
+				String newpass = newpasswordS.getText();
+				if(!fname.isEmpty() && !surname.isEmpty() && !eMail.isEmpty() && !oldpass.isEmpty() && !newpass.isEmpty()) {
+					if(oldpass.equals(passw)) {
+							updateUserData(email, fname, surname, eMail, newpass);
+						
+					}else {
+						JOptionPane.showMessageDialog(null,"Old password is incorrect !!");
+					}
+				}else {
+					JOptionPane.showMessageDialog(null,"Inputs cannot be empty!!");
+				}
+			}
+		});
+		btnUpdateProfile.setBackground(new Color(38, 162, 105));
+		btnUpdateProfile.setFont(new Font("Dyuthi", Font.BOLD, 16));
+		panel_9.add(btnUpdateProfile);
+		
+		JLabel lblCopyright = new JLabel("Copyright © 2024 CMS. All rights reserved.");
+		lblCopyright.setBounds(95, 528, 235, 15);
+		lblCopyright.setForeground(new Color(119, 118, 123));
+		lblCopyright.setFont(new Font("Dyuthi", Font.BOLD, 12));
+		panel_9.add(lblCopyright);
+		
+		JLabel lblFirstname_1 = new JLabel(firstname + " " +surname);
+		lblFirstname_1.setBounds(336, 12, 162, 15);
+		lblFirstname_1.setForeground(new Color(26, 95, 180));
+		lblFirstname_1.setFont(new Font("FreeMono", Font.BOLD, 16));
+		panel_9.add(lblFirstname_1);
+		
+		JLabel lblFirstname_1_1 = new JLabel(email);
+		lblFirstname_1_1.setBounds(341, 25, 136, 15);
+		lblFirstname_1_1.setForeground(new Color(38, 162, 105));
+		lblFirstname_1_1.setFont(new Font("FreeMono", Font.BOLD, 12));
+		panel_9.add(lblFirstname_1_1);
+		
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(119, 118, 123));
+		panel.setBackground(new Color(154, 153, 150));
 		panel.setBounds(0, 0, 161, 582);
 		contentPane.add(panel);
-		panel.setLayout(null);
 		
 		JButton btnTeacher = new JButton("Teacher");
+		btnTeacher.setBounds(35, 149, 96, 25);
+		btnTeacher.setFont(new Font("Dyuthi", Font.BOLD, 16));
 		btnTeacher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.setSelectedIndex(1);
 			}
 		});
-		btnTeacher.setBounds(35, 149, 91, 25);
+		panel.setLayout(null);
 		panel.add(btnTeacher);
 		
 		JButton btnStudent = new JButton("Student");
+		btnStudent.setBounds(35, 181, 96, 25);
+		btnStudent.setFont(new Font("Dyuthi", Font.BOLD, 16));
 		btnStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.setSelectedIndex(2);
 			}
 		});
-		btnStudent.setBounds(35, 181, 91, 25);
 		panel.add(btnStudent);
 		
 		JButton btnAdmin = new JButton("Admin");
+		btnAdmin.setBounds(35, 218, 96, 25);
+		btnAdmin.setFont(new Font("Dyuthi", Font.BOLD, 16));
 		btnAdmin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.setSelectedIndex(3);
 			}
 		});
-		btnAdmin.setBounds(35, 218, 91, 25);
 		panel.add(btnAdmin);
 		
 		JButton btnHome = new JButton("Home");
+		btnHome.setBounds(35, 112, 96, 25);
+		btnHome.setFont(new Font("Dyuthi", Font.BOLD, 16));
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.setSelectedIndex(0);
 				
 			}
 		});
-		btnHome.setBounds(35, 112, 91, 25);
 		panel.add(btnHome);
 		
-		JLabel lblCms = new JLabel("CMS");
+		JLabel lblCms = new JLabel("Course Management");
+		lblCms.setBounds(14, 12, 147, 25);
+		lblCms.setForeground(new Color(99, 69, 44));
 		lblCms.setBackground(new Color(249, 240, 107));
 		lblCms.setVerticalAlignment(SwingConstants.BOTTOM);
-		lblCms.setFont(new Font("Dyuthi", Font.BOLD, 30));
-		lblCms.setBounds(35, 12, 71, 35);
+		lblCms.setFont(new Font("Dyuthi", Font.BOLD, 16));
 		panel.add(lblCms);
 		
 		JButton btnLogOut = new JButton("Log Out");
+		btnLogOut.setBounds(14, 512, 135, 25);
+		btnLogOut.setFont(new Font("Dyuthi", Font.BOLD, 16));
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserLogin lgn = new UserLogin();
@@ -733,11 +957,12 @@ public class Dashboard extends JFrame {
 			}
 		});
 		btnLogOut.setBackground(new Color(165, 29, 45));
-		btnLogOut.setForeground(new Color(255, 255, 255));
-		btnLogOut.setBounds(14, 512, 135, 25);
+		btnLogOut.setForeground(new Color(36, 31, 49));
 		panel.add(btnLogOut);
 		
 		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh.setBounds(14, 437, 135, 25);
+		btnRefresh.setFont(new Font("Dyuthi", Font.BOLD, 16));
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int totalStds = getTotalCount("Student");
@@ -760,40 +985,42 @@ public class Dashboard extends JFrame {
 			}
 		});
 		btnRefresh.setBackground(new Color(245, 194, 17));
-		btnRefresh.setBounds(14, 475, 135, 25);
 		panel.add(btnRefresh);
 		
 		JButton btnCourse = new JButton("Course");
+		btnCourse.setBounds(35, 255, 96, 25);
+		btnCourse.setFont(new Font("Dyuthi", Font.BOLD, 16));
 		btnCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.setSelectedIndex(4);
 			}
 		});
-		btnCourse.setBounds(35, 255, 96, 25);
 		panel.add(btnCourse);
 		
 		JLabel lblUser = new JLabel("User:");
+		lblUser.setBounds(14, 75, 46, 25);
+		lblUser.setForeground(new Color(0, 0, 0));
 		lblUser.setFont(new Font("Dyuthi", Font.BOLD, 18));
-		lblUser.setBounds(14, 61, 46, 25);
 		panel.add(lblUser);
 		
 		JLabel lblNewLabel_1 = new JLabel(role);
-		lblNewLabel_1.setForeground(new Color(51, 209, 122));
+		lblNewLabel_1.setBounds(61, 75, 88, 25);
+		lblNewLabel_1.setForeground(new Color(26, 95, 180));
 		lblNewLabel_1.setFont(new Font("FreeMono", Font.BOLD, 20));
-		lblNewLabel_1.setBounds(61, 59, 88, 25);
 		panel.add(lblNewLabel_1);
 		
 		JButton btnNewButton_1 = new JButton("Std Progress");
+		btnNewButton_1.setBounds(14, 334, 117, 25);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.setSelectedIndex(5);
 			}
 		});
 		btnNewButton_1.setFont(new Font("Dyuthi", Font.BOLD, 12));
-		btnNewButton_1.setBounds(14, 334, 117, 25);
 		panel.add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Std Report");
+		btnNewButton_1_1.setBounds(14, 371, 117, 25);
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ResultShow showResult = new ResultShow();
@@ -801,8 +1028,29 @@ public class Dashboard extends JFrame {
 			}
 		});
 		btnNewButton_1_1.setFont(new Font("Dyuthi", Font.BOLD, 12));
-		btnNewButton_1_1.setBounds(14, 371, 117, 25);
 		panel.add(btnNewButton_1_1);
+		
+		JButton btnSetting = new JButton("Setting");
+		btnSetting.setBounds(14, 474, 135, 25);
+		btnSetting.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.setSelectedIndex(6);
+			}
+		});
+		btnSetting.setFont(new Font("Dyuthi", Font.BOLD, 16));
+		btnSetting.setBackground(new Color(119, 118, 123));
+		panel.add(btnSetting);
+		
+		JLabel lblSystem = new JLabel("System");
+		lblSystem.setBounds(49, 35, 70, 15);
+		lblSystem.setForeground(new Color(99, 69, 44));
+		lblSystem.setFont(new Font("Dyuthi", Font.BOLD, 16));
+		panel.add(lblSystem);
+		
+		JLabel lblfebam = new JLabel("3Feb03:10:30am2024");
+		lblfebam.setFont(new Font("FreeMono", Font.BOLD, 10));
+		lblfebam.setBounds(14, 0, 147, 15);
+		panel.add(lblfebam);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(119, 118, 123));
