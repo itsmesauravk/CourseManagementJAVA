@@ -16,6 +16,11 @@ import Swing.Course.CourseAdd;
 import Swing.Course.CourseDlt;
 import Swing.Course.CourseUpdate;
 import Swing.Course.CoursesDisplay;
+import Swing.Results.ResultAdd;
+import Swing.Results.ResultDisplay;
+import Swing.Results.ResultEdit;
+import Swing.Results.ResultShow;
+import Swing.Results.StudentReport;
 import Swing.Students.StudentAdd;
 import Swing.Students.StudentDelete;
 import Swing.Students.StudentDisplay;
@@ -26,6 +31,8 @@ import Swing.Teachers.TeacherEdit;
 import Swing.Teachers.TeachersDisplay;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTabbedPane;
 import javax.swing.JButton;
@@ -51,6 +58,7 @@ public class Dashboard extends JFrame {
 	private StudentDisplay studentDis;
 	private TeachersDisplay teacherDis;
 	private AdminDisplay adminDis;
+	private ResultDisplay resultDis;
 	
 	//for refreshing
 	private JLabel label_1;
@@ -246,14 +254,14 @@ public class Dashboard extends JFrame {
 		panel_2.add(panel_7);
 		panel_7.setLayout(null);
 		
-		JLabel lblAdmin = new JLabel("Admin");
+		JLabel lblAdmin = new JLabel("Admins");
 		lblAdmin.setBounds(29, 12, 75, 29);
 		lblAdmin.setFont(new Font("Dyuthi", Font.BOLD, 22));
 		panel_7.add(lblAdmin);
 		
 		JLabel label_1 = new JLabel(totalAdmins);
 		label_1.setFont(new Font("Dialog", Font.BOLD, 44));
-		label_1.setBounds(29, 41, 75, 60);
+		label_1.setBounds(39, 41, 75, 60);
 		panel_7.add(label_1);
 		
 		JPanel panel_7_1 = new JPanel();
@@ -262,14 +270,14 @@ public class Dashboard extends JFrame {
 		panel_2.add(panel_7_1);
 		panel_7_1.setLayout(null);
 		
-		JLabel lblTeacher = new JLabel("Teacher");
+		JLabel lblTeacher = new JLabel("Teachers");
 		lblTeacher.setBounds(24, 12, 87, 23);
 		lblTeacher.setFont(new Font("Dyuthi", Font.BOLD, 22));
 		panel_7_1.add(lblTeacher);
 		
 		JLabel label_1_1 = new JLabel(totalTeachers);
 		label_1_1.setFont(new Font("Dialog", Font.BOLD, 44));
-		label_1_1.setBounds(12, 41, 75, 60);
+		label_1_1.setBounds(48, 41, 75, 60);
 		panel_7_1.add(label_1_1);
 		
 		JPanel panel_7_2 = new JPanel();
@@ -278,14 +286,14 @@ public class Dashboard extends JFrame {
 		panel_2.add(panel_7_2);
 		panel_7_2.setLayout(null);
 		
-		JLabel lblStudent = new JLabel("Student");
-		lblStudent.setBounds(23, 12, 76, 23);
+		JLabel lblStudent = new JLabel("Students");
+		lblStudent.setBounds(24, 12, 99, 23);
 		lblStudent.setFont(new Font("Dyuthi", Font.BOLD, 22));
 		panel_7_2.add(lblStudent);
 		
 		JLabel label_1_2 = new JLabel(totalStudents);
 		label_1_2.setFont(new Font("Dialog", Font.BOLD, 44));
-		label_1_2.setBounds(12, 41, 99, 60);
+		label_1_2.setBounds(45, 41, 78, 60);
 		panel_7_2.add(label_1_2);
 		
 		JPanel panel_7_3 = new JPanel();
@@ -294,14 +302,14 @@ public class Dashboard extends JFrame {
 		panel_7_3.setBounds(23, 227, 130, 113);
 		panel_2.add(panel_7_3);
 		
-		JLabel lblAdmin_1 = new JLabel("Course");
+		JLabel lblAdmin_1 = new JLabel("Courses");
 		lblAdmin_1.setFont(new Font("Dyuthi", Font.BOLD, 22));
 		lblAdmin_1.setBounds(29, 12, 75, 29);
 		panel_7_3.add(lblAdmin_1);
 		
 		JLabel label_1_3 = new JLabel(totalCourse);
 		label_1_3.setFont(new Font("Dialog", Font.BOLD, 44));
-		label_1_3.setBounds(29, 41, 75, 60);
+		label_1_3.setBounds(43, 41, 75, 60);
 		panel_7_3.add(label_1_3);
 		
 		JPanel panel_3 = new JPanel();
@@ -588,7 +596,7 @@ public class Dashboard extends JFrame {
 		
 		
 		btnDltCourse.setFont(new Font("Dyuthi", Font.BOLD, 14));
-		btnDltCourse.setBounds(348, 110, 88, 41);
+		btnDltCourse.setBounds(348, 110, 102, 41);
 		panel_6.add(btnDltCourse);
 		
 		coursesDis = new CoursesDisplay();
@@ -610,6 +618,61 @@ public class Dashboard extends JFrame {
 		btnRefresh_1.setBackground(new Color(51, 209, 122));
 		btnRefresh_1.setBounds(382, 16, 117, 25);
 		panel_6.add(btnRefresh_1);
+		
+		JPanel panel_8 = new JPanel();
+		tabbedPane.addTab("Std Progress", null, panel_8, null);
+		panel_8.setLayout(null);
+		
+		JLabel lblStudentProgress = new JLabel("Student Progress");
+		lblStudentProgress.setFont(new Font("Dyuthi", Font.BOLD, 26));
+		lblStudentProgress.setBounds(27, 12, 217, 61);
+		panel_8.add(lblStudentProgress);
+		
+		JButton btnAddMark = new JButton("Add Mark");
+		btnAddMark.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ResultAdd addResult = new ResultAdd();
+				addResult.setVisible(true);
+			}
+		});
+		btnAddMark.setBackground(new Color(53, 132, 228));
+		btnAddMark.setFont(new Font("Dyuthi", Font.BOLD, 18));
+		btnAddMark.setBounds(72, 114, 124, 39);
+		panel_8.add(btnAddMark);
+		
+		JButton btnStudentReport = new JButton("Edit Mark");
+		btnStudentReport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ResultEdit editResult = new ResultEdit();
+				editResult.setVisible(true);
+			}
+		});
+		btnStudentReport.setBackground(new Color(229, 165, 10));
+		btnStudentReport.setFont(new Font("Dyuthi", Font.BOLD, 18));
+		btnStudentReport.setBounds(288, 114, 136, 39);
+		panel_8.add(btnStudentReport);
+		
+		
+		resultDis = new ResultDisplay();
+		resultDis.setBounds(12, 176, 468, 331);
+		resultDis.setVisible(true);
+		panel_8.add(resultDis);
+		resultDis.setLayout(null);
+		
+		JButton btnRefresh_2 = new JButton("Refresh");
+		btnRefresh_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				resultDis = new ResultDisplay();
+				resultDis.setBounds(12, 176, 468, 331);
+				resultDis.setVisible(true);
+				panel_8.add(resultDis);
+				resultDis.setLayout(null);
+			}
+		});
+		btnRefresh_2.setBackground(new Color(38, 162, 105));
+		btnRefresh_2.setBounds(363, 31, 117, 25);
+		panel_8.add(btnRefresh_2);
+		
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(119, 118, 123));
@@ -671,7 +734,7 @@ public class Dashboard extends JFrame {
 		});
 		btnLogOut.setBackground(new Color(165, 29, 45));
 		btnLogOut.setForeground(new Color(255, 255, 255));
-		btnLogOut.setBounds(14, 505, 117, 25);
+		btnLogOut.setBounds(14, 512, 135, 25);
 		panel.add(btnLogOut);
 		
 		JButton btnRefresh = new JButton("Refresh");
@@ -697,7 +760,7 @@ public class Dashboard extends JFrame {
 			}
 		});
 		btnRefresh.setBackground(new Color(245, 194, 17));
-		btnRefresh.setBounds(14, 457, 117, 25);
+		btnRefresh.setBounds(14, 475, 135, 25);
 		panel.add(btnRefresh);
 		
 		JButton btnCourse = new JButton("Course");
@@ -719,6 +782,27 @@ public class Dashboard extends JFrame {
 		lblNewLabel_1.setFont(new Font("FreeMono", Font.BOLD, 20));
 		lblNewLabel_1.setBounds(61, 59, 88, 25);
 		panel.add(lblNewLabel_1);
+		
+		JButton btnNewButton_1 = new JButton("Std Progress");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.setSelectedIndex(5);
+			}
+		});
+		btnNewButton_1.setFont(new Font("Dyuthi", Font.BOLD, 12));
+		btnNewButton_1.setBounds(14, 334, 117, 25);
+		panel.add(btnNewButton_1);
+		
+		JButton btnNewButton_1_1 = new JButton("Std Report");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ResultShow showResult = new ResultShow();
+				showResult.setVisible(true);
+			}
+		});
+		btnNewButton_1_1.setFont(new Font("Dyuthi", Font.BOLD, 12));
+		btnNewButton_1_1.setBounds(14, 371, 117, 25);
+		panel.add(btnNewButton_1_1);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(119, 118, 123));
@@ -763,6 +847,11 @@ public class Dashboard extends JFrame {
 		    btnDltCourse.setVisible(false);
 		}
 		
+		if("Teacher".equals(role)) {
+			btnNewButton_1.setVisible(true);
+		}else {
+			btnNewButton_1.setVisible(false);
+		}
 		
 		
 	}
