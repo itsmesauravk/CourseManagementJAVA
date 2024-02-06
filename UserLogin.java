@@ -24,6 +24,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.DropMode;
 
 public class UserLogin extends JFrame {
 
@@ -85,39 +88,45 @@ public class UserLogin extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 745, 518);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(246, 245, 244));
+		contentPane.setForeground(new Color(229, 165, 10));
+		contentPane.setBackground(new Color(222, 221, 218));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblLogin = new JLabel("Login ");
-		lblLogin.setBounds(266, 12, 118, 35);
-		lblLogin.setFont(new Font("Dyuthi", Font.BOLD, 30));
+		lblLogin.setBounds(266, 12, 170, 63);
+		lblLogin.setFont(new Font("Dyuthi", Font.BOLD, 40));
 		contentPane.add(lblLogin);
 		
-		JLabel lblEmail = new JLabel("Email");
+		JLabel lblEmail = new JLabel("Email :");
+		lblEmail.setForeground(new Color(165, 29, 45));
 		lblEmail.setBounds(166, 127, 88, 35);
-		lblEmail.setFont(new Font("Dyuthi", Font.BOLD, 20));
+		lblEmail.setFont(new Font("Dyuthi", Font.BOLD, 22));
 		contentPane.add(lblEmail);
 		
-		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(166, 184, 88, 35);
+		JLabel lblPassword = new JLabel("Password :");
+		lblPassword.setForeground(new Color(165, 29, 45));
+		lblPassword.setBounds(166, 184, 127, 35);
 		lblPassword.setFont(new Font("Dyuthi", Font.BOLD, 20));
 		contentPane.add(lblPassword);
 		
 		emailField = new JTextField();
-		emailField.setBounds(266, 128, 210, 32);
+		emailField.setBounds(311, 128, 210, 32);
 		emailField.setBackground(new Color(255, 255, 255));
 		contentPane.add(emailField);
 		emailField.setColumns(10);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(266, 185, 210, 32);
+		passwordField.setEchoChar('*');
+		passwordField.setBounds(311, 185, 210, 32);
 		contentPane.add(passwordField);
 		
 		JButton btnLogin = new JButton("Login");
-		btnLogin.setBounds(227, 265, 117, 35);
+		btnLogin.setBackground(new Color(38, 162, 105));
+		btnLogin.setForeground(new Color(0, 0, 0));
+		btnLogin.setBounds(249, 264, 117, 35);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String emailLogin = emailField.getText();
@@ -138,12 +147,15 @@ public class UserLogin extends JFrame {
 		contentPane.add(btnLogin);
 		
 		JLabel lblCreateANew = new JLabel("Create a new account ?");
-		lblCreateANew.setBounds(207, 331, 170, 15);
+		lblCreateANew.setForeground(new Color(28, 113, 216));
+		lblCreateANew.setBounds(166, 349, 170, 15);
 		lblCreateANew.setFont(new Font("Dyuthi", Font.BOLD, 16));
 		contentPane.add(lblCreateANew);
 		
 		JButton btnNewButton = new JButton("Register");
-		btnNewButton.setBounds(228, 349, 117, 25);
+		btnNewButton.setForeground(new Color(229, 165, 10));
+		btnNewButton.setBackground(new Color(28, 113, 216));
+		btnNewButton.setBounds(338, 344, 117, 25);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Register newReg = new Register();  //creating obj this will redirect to Registration page

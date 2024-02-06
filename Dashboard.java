@@ -286,8 +286,8 @@ public class Dashboard extends JFrame {
 		panel_2.add(lblTab_2);
 		
 		JLabel lblNewLabel = new JLabel(firstname);
-		lblNewLabel.setForeground(new Color(46, 194, 126));
-		lblNewLabel.setFont(new Font("Dyuthi", Font.BOLD, 24));
+		lblNewLabel.setForeground(new Color(38, 162, 105));
+		lblNewLabel.setFont(new Font("FreeMono", Font.BOLD, 24));
 		lblNewLabel.setBounds(369, 11, 130, 33);
 		panel_2.add(lblNewLabel);
 		
@@ -892,8 +892,8 @@ public class Dashboard extends JFrame {
 		
 		
 		JPanel panel = new JPanel();
+		panel.setBounds(-2, 0, 163, 582);
 		panel.setBackground(new Color(154, 153, 150));
-		panel.setBounds(0, 0, 161, 582);
 		contentPane.add(panel);
 		
 		JButton btnTeacher = new JButton("Teacher");
@@ -938,30 +938,8 @@ public class Dashboard extends JFrame {
 		});
 		panel.add(btnHome);
 		
-		JLabel lblCms = new JLabel("Course Management");
-		lblCms.setBounds(14, 12, 147, 25);
-		lblCms.setForeground(new Color(99, 69, 44));
-		lblCms.setBackground(new Color(249, 240, 107));
-		lblCms.setVerticalAlignment(SwingConstants.BOTTOM);
-		lblCms.setFont(new Font("Dyuthi", Font.BOLD, 16));
-		panel.add(lblCms);
-		
-		JButton btnLogOut = new JButton("Log Out");
-		btnLogOut.setBounds(14, 512, 135, 25);
-		btnLogOut.setFont(new Font("Dyuthi", Font.BOLD, 16));
-		btnLogOut.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				UserLogin lgn = new UserLogin();
-				lgn.setVisible(true);
-				dispose();
-			}
-		});
-		btnLogOut.setBackground(new Color(165, 29, 45));
-		btnLogOut.setForeground(new Color(36, 31, 49));
-		panel.add(btnLogOut);
-		
 		JButton btnRefresh = new JButton("Refresh");
-		btnRefresh.setBounds(14, 437, 135, 25);
+		btnRefresh.setBounds(14, 464, 135, 25);
 		btnRefresh.setFont(new Font("Dyuthi", Font.BOLD, 16));
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -984,7 +962,7 @@ public class Dashboard extends JFrame {
 		        
 			}
 		});
-		btnRefresh.setBackground(new Color(245, 194, 17));
+		btnRefresh.setBackground(new Color(38, 162, 105));
 		panel.add(btnRefresh);
 		
 		JButton btnCourse = new JButton("Course");
@@ -997,20 +975,9 @@ public class Dashboard extends JFrame {
 		});
 		panel.add(btnCourse);
 		
-		JLabel lblUser = new JLabel("User:");
-		lblUser.setBounds(14, 75, 46, 25);
-		lblUser.setForeground(new Color(0, 0, 0));
-		lblUser.setFont(new Font("Dyuthi", Font.BOLD, 18));
-		panel.add(lblUser);
-		
-		JLabel lblNewLabel_1 = new JLabel(role);
-		lblNewLabel_1.setBounds(61, 75, 88, 25);
-		lblNewLabel_1.setForeground(new Color(26, 95, 180));
-		lblNewLabel_1.setFont(new Font("FreeMono", Font.BOLD, 20));
-		panel.add(lblNewLabel_1);
-		
 		JButton btnNewButton_1 = new JButton("Std Progress");
-		btnNewButton_1.setBounds(14, 334, 117, 25);
+		btnNewButton_1.setBackground(new Color(129, 61, 156));
+		btnNewButton_1.setBounds(14, 390, 135, 25);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.setSelectedIndex(5);
@@ -1020,7 +987,8 @@ public class Dashboard extends JFrame {
 		panel.add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Std Report");
-		btnNewButton_1_1.setBounds(14, 371, 117, 25);
+		btnNewButton_1_1.setBackground(new Color(53, 132, 228));
+		btnNewButton_1_1.setBounds(14, 427, 135, 25);
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ResultShow showResult = new ResultShow();
@@ -1030,32 +998,140 @@ public class Dashboard extends JFrame {
 		btnNewButton_1_1.setFont(new Font("Dyuthi", Font.BOLD, 12));
 		panel.add(btnNewButton_1_1);
 		
+		JLabel lblfebam = new JLabel("3Feb03:10:30am2024");
+		lblfebam.setFont(new Font("FreeMono", Font.BOLD, 10));
+		lblfebam.setBounds(14, 0, 147, 15);
+		panel.add(lblfebam);
+		
+		JLabel lblSystem = new JLabel("CMS");
+		lblSystem.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblSystem.setForeground(new Color(99, 69, 44));
+		lblSystem.setFont(new Font("Dyuthi", Font.BOLD, 42));
+		lblSystem.setBackground(new Color(249, 240, 107));
+		lblSystem.setBounds(35, 12, 106, 64);
+		panel.add(lblSystem);
+		
+		JPanel panel_13 = new JPanel();
+		panel_13.setBackground(new Color(192, 191, 188));
+		panel_13.setBounds(14, 98, 137, 204);
+		panel.add(panel_13);
+		
+		JPanel panel_15 = new JPanel();
+		panel_15.setBackground(new Color(192, 191, 188));
+		panel_15.setBounds(12, 20, 151, 57);
+		panel.add(panel_15);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(701, 0, 163, 582);
+		panel_1.setBackground(new Color(119, 118, 123));
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JPanel panel_10 = new JPanel();
+		panel_10.setBackground(new Color(205, 171, 143));
+		panel_10.setBounds(0, 0, 163, 69);
+		panel_1.add(panel_10);
+		panel_10.setLayout(null);
+		
+		JLabel lblProfile = new JLabel("Profile");
+		lblProfile.setForeground(new Color(0, 0, 0));
+		lblProfile.setBounds(34, 25, 90, 32);
+		lblProfile.setFont(new Font("Dyuthi", Font.BOLD, 30));
+		panel_10.add(lblProfile);
+		
+		JPanel panel_11 = new JPanel();
+		panel_11.setBackground(new Color(222, 221, 218));
+		panel_11.setBounds(0, 81, 163, 49);
+		panel_1.add(panel_11);
+		panel_11.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel(role);
+		lblNewLabel_1.setBounds(36, 12, 88, 25);
+		panel_11.add(lblNewLabel_1);
+		lblNewLabel_1.setForeground(new Color(26, 95, 180));
+		lblNewLabel_1.setFont(new Font("Dyuthi", Font.BOLD, 20));
+		
+		JPanel panel_12 = new JPanel();
+		panel_12.setBackground(new Color(192, 191, 188));
+		panel_12.setBounds(0, 154, 163, 186);
+		panel_1.add(panel_12);
+		panel_12.setLayout(null);
+		
+		JLabel lblFirstname_2 = new JLabel(firstname);
+		lblFirstname_2.setForeground(new Color(38, 162, 105));
+		lblFirstname_2.setFont(new Font("Dyuthi", Font.PLAIN, 18));
+		lblFirstname_2.setBounds(12, 52, 92, 30);
+		panel_12.add(lblFirstname_2);
+		
+		JLabel lblFirstname_2_1 = new JLabel(surname);
+		lblFirstname_2_1.setForeground(new Color(38, 162, 105));
+		lblFirstname_2_1.setFont(new Font("Dyuthi", Font.PLAIN, 18));
+		lblFirstname_2_1.setBounds(12, 94, 139, 30);
+		panel_12.add(lblFirstname_2_1);
+		
+		JLabel lblFullName = new JLabel("First Name :");
+		lblFullName.setFont(new Font("Dyuthi", Font.BOLD, 16));
+		lblFullName.setBounds(12, 39, 113, 15);
+		panel_12.add(lblFullName);
+		
+		JLabel lblLastName = new JLabel("Last Name :");
+		lblLastName.setFont(new Font("Dyuthi", Font.BOLD, 16));
+		lblLastName.setBounds(12, 82, 113, 15);
+		panel_12.add(lblLastName);
+		
+		JLabel lblEmail_1 = new JLabel("Email :");
+		lblEmail_1.setFont(new Font("Dyuthi", Font.BOLD, 16));
+		lblEmail_1.setBounds(12, 127, 113, 15);
+		panel_12.add(lblEmail_1);
+		
+		JLabel lblFirstname_2_1_1 = new JLabel(email);
+		lblFirstname_2_1_1.setForeground(new Color(97, 53, 131));
+		lblFirstname_2_1_1.setFont(new Font("Dyuthi", Font.PLAIN, 16));
+		lblFirstname_2_1_1.setBounds(12, 144, 139, 30);
+		panel_12.add(lblFirstname_2_1_1);
+		
+		JLabel lblGeneralInfo = new JLabel("General Info :");
+		lblGeneralInfo.setForeground(new Color(94, 92, 100));
+		lblGeneralInfo.setFont(new Font("Dyuthi", Font.BOLD, 16));
+		lblGeneralInfo.setBounds(23, 12, 113, 15);
+		panel_12.add(lblGeneralInfo);
+		
+		JPanel panel_14 = new JPanel();
+		panel_14.setBackground(new Color(192, 191, 188));
+		panel_14.setBounds(0, 426, 163, 105);
+		panel_1.add(panel_14);
+		panel_14.setLayout(null);
+		
 		JButton btnSetting = new JButton("Setting");
-		btnSetting.setBounds(14, 474, 135, 25);
+		btnSetting.setBounds(12, 37, 135, 25);
+		panel_14.add(btnSetting);
 		btnSetting.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.setSelectedIndex(6);
 			}
 		});
 		btnSetting.setFont(new Font("Dyuthi", Font.BOLD, 16));
-		btnSetting.setBackground(new Color(119, 118, 123));
-		panel.add(btnSetting);
+		btnSetting.setBackground(new Color(150, 233, 198));
 		
-		JLabel lblSystem = new JLabel("System");
-		lblSystem.setBounds(49, 35, 70, 15);
-		lblSystem.setForeground(new Color(99, 69, 44));
-		lblSystem.setFont(new Font("Dyuthi", Font.BOLD, 16));
-		panel.add(lblSystem);
+		JButton btnLogOut = new JButton("Log Out");
+		btnLogOut.setBounds(12, 74, 135, 25);
+		panel_14.add(btnLogOut);
+		btnLogOut.setFont(new Font("Dyuthi", Font.BOLD, 16));
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserLogin lgn = new UserLogin();
+				lgn.setVisible(true);
+				dispose();
+			}
+		});
+		btnLogOut.setBackground(new Color(165, 29, 45));
+		btnLogOut.setForeground(new Color(36, 31, 49));
 		
-		JLabel lblfebam = new JLabel("3Feb03:10:30am2024");
-		lblfebam.setFont(new Font("FreeMono", Font.BOLD, 10));
-		lblfebam.setBounds(14, 0, 147, 15);
-		panel.add(lblfebam);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(119, 118, 123));
-		panel_1.setBounds(701, 0, 163, 582);
-		contentPane.add(panel_1);
+		JLabel lblSettingLogout = new JLabel("Setting / Logout");
+		lblSettingLogout.setForeground(new Color(94, 92, 100));
+		lblSettingLogout.setFont(new Font("Dyuthi", Font.BOLD, 16));
+		lblSettingLogout.setBounds(12, 10, 135, 15);
+		panel_14.add(lblSettingLogout);
 		
 		
 		

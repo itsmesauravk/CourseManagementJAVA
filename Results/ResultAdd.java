@@ -191,6 +191,7 @@ public class ResultAdd extends JFrame {
 		contentPane.add(btnAdd);
 		
 		JButton btnReturn = new JButton("Return");
+		btnReturn.setFont(new Font("Dyuthi", Font.BOLD, 20));
 		btnReturn.setBackground(new Color(229, 165, 10));
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

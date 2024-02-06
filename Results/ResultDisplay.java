@@ -60,7 +60,7 @@ public class ResultDisplay extends JPanel {
 
         columnModel.getColumn(0).setPreferredWidth(50);
         columnModel.getColumn(1).setPreferredWidth(120);
-        columnModel.getColumn(2).setPreferredWidth(70);
+        columnModel.getColumn(2).setPreferredWidth(70); 
         columnModel.getColumn(3).setPreferredWidth(70);
         columnModel.getColumn(4).setPreferredWidth(50);
         columnModel.getColumn(6).setPreferredWidth(50);
