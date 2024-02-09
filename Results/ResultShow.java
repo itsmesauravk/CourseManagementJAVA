@@ -60,13 +60,13 @@ public class ResultShow extends JFrame {
 		JButton btnShowReport = new JButton("Show Report");
 		btnShowReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String stdId = studentId.getText();
-				if(!stdId.isEmpty()) {
-					int studentId = Integer.parseInt(stdId);
-					StudentReport reportStd = new StudentReport(studentId);
-					reportStd.setVisible(true);
-					dispose();
-				}
+					String stdId = studentId.getText();
+					if(!stdId.isEmpty()) {
+						int studentId = Integer.parseInt(stdId);
+						StudentReport reportStd = new StudentReport(studentId);
+						reportStd.setVisible(true);
+						dispose();
+					}
 			}
 		});
 		btnShowReport.setFont(new Font("Dyuthi", Font.BOLD, 20));

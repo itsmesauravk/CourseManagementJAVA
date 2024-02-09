@@ -49,7 +49,7 @@ public class ResultEdit extends JFrame {
 		});
 	}
 
-	//adding result
+	//editing result
 	private void editResult(int std_id,int lvl, String module1,int mark1,  String module2,int mark2, String module3,  int mark3, int percent, String result) {
 	    String url = "jdbc:mysql://localhost:3306/CMS";
 	    String dbUsername = "root";

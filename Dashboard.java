@@ -858,7 +858,22 @@ public class Dashboard extends JFrame {
 				String newpass = newpasswordS.getText();
 				if(!fname.isEmpty() && !surname.isEmpty() && !eMail.isEmpty() && !oldpass.isEmpty() && !newpass.isEmpty()) {
 					if(oldpass.equals(passw)) {
-							updateUserData(email, fname, surname, eMail, newpass);
+							
+							int result = JOptionPane.showConfirmDialog(
+									btnUpdateProfile,
+					                "Do you want to update your profile ?",
+					                "Confirmation",
+					                JOptionPane.YES_NO_OPTION
+					        );
+
+					        if (result == JOptionPane.YES_OPTION) {
+					            // User clicked Yes
+					            System.out.println("Profiel updated");
+					            updateUserData(email, fname, surname, eMail, newpass);
+					        } else {
+					            // User clicked No or closed the dialog
+					            System.out.println("Failed.");
+					        }
 						
 					}else {
 						JOptionPane.showMessageDialog(null,"Old password is incorrect !!");
