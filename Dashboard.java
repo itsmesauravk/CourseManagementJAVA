@@ -286,7 +286,7 @@ public class Dashboard extends JFrame {
 		panel_2.add(lblTab_2);
 		
 		JLabel lblNewLabel = new JLabel(firstname);
-		lblNewLabel.setForeground(new Color(38, 162, 105));
+		lblNewLabel.setForeground(new Color(26, 95, 180));
 		lblNewLabel.setFont(new Font("FreeMono", Font.BOLD, 24));
 		lblNewLabel.setBounds(369, 11, 130, 33);
 		panel_2.add(lblNewLabel);
@@ -358,6 +358,11 @@ public class Dashboard extends JFrame {
 		label_1_3.setFont(new Font("Dialog", Font.BOLD, 44));
 		label_1_3.setBounds(43, 41, 75, 60);
 		panel_7_3.add(label_1_3);
+		
+		JPanel panel_16 = new JPanel();
+		panel_16.setBackground(new Color(192, 191, 188));
+		panel_16.setBounds(280, 12, 208, 41);
+		panel_2.add(panel_16);
 		
 		JPanel panel_3 = new JPanel();
 		tabbedPane.addTab("Teacher", null, panel_3, null);
@@ -1073,13 +1078,13 @@ public class Dashboard extends JFrame {
 		panel_12.setLayout(null);
 		
 		JLabel lblFirstname_2 = new JLabel(firstname);
-		lblFirstname_2.setForeground(new Color(38, 162, 105));
+		lblFirstname_2.setForeground(new Color(26, 95, 180));
 		lblFirstname_2.setFont(new Font("Dyuthi", Font.PLAIN, 18));
 		lblFirstname_2.setBounds(12, 52, 92, 30);
 		panel_12.add(lblFirstname_2);
 		
 		JLabel lblFirstname_2_1 = new JLabel(surname);
-		lblFirstname_2_1.setForeground(new Color(38, 162, 105));
+		lblFirstname_2_1.setForeground(new Color(26, 95, 180));
 		lblFirstname_2_1.setFont(new Font("Dyuthi", Font.PLAIN, 18));
 		lblFirstname_2_1.setBounds(12, 94, 139, 30);
 		panel_12.add(lblFirstname_2_1);

@@ -1,5 +1,3 @@
-// ResultDisplay.java
-
 package Swing.Results;
 
 import javax.swing.*;
@@ -8,16 +6,19 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.sql.*;
-
+//
 public class ResultDisplay extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private JTable table;
 
     public ResultDisplay() {
-//        setLayout(new BorderLayout());
-        setLayout(null);
+//        setLayout(null);
+    	setLayout(new BorderLayout());
 
         // Getting the data
         DefaultTableModel model = new DefaultTableModel();
@@ -47,39 +48,75 @@ public class ResultDisplay extends JPanel {
             e.printStackTrace();
         }
 
-        JScrollPane scrollPane = new JScrollPane();
-        // Set the bounds for the JScrollPane explicitly
-        scrollPane.setBounds(0, 0, 465, 311);
-        add(scrollPane);
-
+        // Instantiate the JTable after fetching data
         table = new JTable(model);
-        scrollPane.setViewportView(table);
-        table.setRowSelectionAllowed(false);
 
-        TableColumnModel columnModel = table.getColumnModel();
+        // Create JScrollPane with the initialized JTable
+//        JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-        columnModel.getColumn(0).setPreferredWidth(50);
-        columnModel.getColumn(1).setPreferredWidth(120);
-        columnModel.getColumn(2).setPreferredWidth(70); 
-        columnModel.getColumn(3).setPreferredWidth(70);
-        columnModel.getColumn(4).setPreferredWidth(50);
-        columnModel.getColumn(6).setPreferredWidth(50);
-        columnModel.getColumn(8).setPreferredWidth(50);
-        columnModel.getColumn(10).setPreferredWidth(50);
-        columnModel.getColumn(11).setPreferredWidth(50);
-        columnModel.getColumn(12).setPreferredWidth(70);
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         
-        
-        
+        // Set the bounds for the JScrollPane explicitly
+        scrollPane.setBounds(0, 0, 511, 310);
 
-        table.setShowGrid(true);
-        table.setShowHorizontalLines(true);
-        table.setShowVerticalLines(true);
+        // Add the JScrollPane to the panel
+        add(scrollPane, BorderLayout.CENTER);
+        
+//        TableColumnModel columnModel = table.getColumnModel();
+//
+//        columnModel.getColumn(0).setPreferredWidth(120);
+//        columnModel.getColumn(1).setPreferredWidth(120);
+//        columnModel.getColumn(2).setPreferredWidth(120); 
+//        columnModel.getColumn(3).setPreferredWidth(120);
+//        columnModel.getColumn(4).setPreferredWidth(120);
+//        columnModel.getColumn(6).setPreferredWidth(120);
+//        columnModel.getColumn(8).setPreferredWidth(120);
+//        columnModel.getColumn(10).setPreferredWidth(120);
+//        columnModel.getColumn(11).setPreferredWidth(120);
+//        columnModel.getColumn(12).setPreferredWidth(120);
+
+
+        table.setShowGrid(false);
+        table.setShowHorizontalLines(false);
+        table.setShowVerticalLines(false);
 
         table.setRowHeight(30);
-
+ 
         JTableHeader header = table.getTableHeader();
         header.setVisible(true);
         table.setIntercellSpacing(new java.awt.Dimension(7, 7));
+
+        customizeTableAppearance();
+    }
+
+    private void customizeTableAppearance() {
+        table.setGridColor(Color.BLACK);
+        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
+        table.setFont(new Font("Arial", Font.PLAIN, 12));
+        table.setRowHeight(25);
+        table.setRowMargin(5);
+        table.setIntercellSpacing(new Dimension(10, 10));
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.setShowGrid(true);
+        table.setShowHorizontalLines(true);
+        table.setShowVerticalLines(true);
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Result Display");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 400);
+        frame.getContentPane().add(new ResultDisplay());
+        frame.setVisible(true);
     }
 }
+
+
+
+
+//////
+
+
+
+
