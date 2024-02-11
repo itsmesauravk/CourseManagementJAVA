@@ -126,6 +126,7 @@ public class Dashboard extends JFrame {
                     userData.put("email", resultSet.getString("email"));
                     userData.put("password", resultSet.getString("password"));
                     userData.put("role", resultSet.getString("role"));
+                    userData.put("userId", resultSet.getString("id"));
                    
                 }
             }
@@ -244,6 +245,7 @@ public class Dashboard extends JFrame {
 		String email = userData.get("email");
 		String role = userData.get("role");
 		String passw = userData.get("password");
+		String userId = userData.get("userId");
 		
 		
 		DatabaseOperations databaseOperations = new DatabaseOperations();
@@ -254,6 +256,10 @@ public class Dashboard extends JFrame {
         int totalStds = getTotalCount("Student");
         int totalA = getTotalCount("Admin");
         int totalT = getTotalCount("Teacher");
+        
+        
+        int Id = Integer.parseInt(userId);
+        
 
         String totalAdmins = String.valueOf(totalA);
         String totalTeachers = String.valueOf(totalT);
@@ -997,7 +1003,7 @@ public class Dashboard extends JFrame {
 		
 		JButton btnNewButton_1 = new JButton("Std Progress");
 		btnNewButton_1.setBackground(new Color(129, 61, 156));
-		btnNewButton_1.setBounds(14, 390, 135, 25);
+		btnNewButton_1.setBounds(14, 321, 135, 25);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.setSelectedIndex(5);
@@ -1008,7 +1014,7 @@ public class Dashboard extends JFrame {
 		
 		JButton btnNewButton_1_1 = new JButton("Std Report");
 		btnNewButton_1_1.setBackground(new Color(53, 132, 228));
-		btnNewButton_1_1.setBounds(14, 427, 135, 25);
+		btnNewButton_1_1.setBounds(14, 359, 135, 25);
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ResultShow showResult = new ResultShow();
@@ -1040,6 +1046,18 @@ public class Dashboard extends JFrame {
 		panel_15.setBackground(new Color(192, 191, 188));
 		panel_15.setBounds(12, 20, 151, 57);
 		panel.add(panel_15);
+		
+		JButton btnNewButton_2 = new JButton("My Report");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				StudentReport reportS = new StudentReport(Id);
+				reportS.setVisible(true);
+			}
+		});
+		btnNewButton_2.setBackground(new Color(230, 97, 0));
+		btnNewButton_2.setFont(new Font("Dyuthi", Font.BOLD, 16));
+		btnNewButton_2.setBounds(14, 427, 135, 25);
+		panel.add(btnNewButton_2);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(701, 0, 163, 582);
@@ -1172,6 +1190,9 @@ public class Dashboard extends JFrame {
 		    btnNewButton.setVisible(true);
 		    btnEditCourse.setVisible(true);
 		    btnDltCourse.setVisible(true);
+		    //std report
+		    btnNewButton_1_1.setVisible(true);
+		    
 		} else {
 		    
 		    btnAddStudent.setVisible(false);
@@ -1189,12 +1210,20 @@ public class Dashboard extends JFrame {
 		    btnNewButton.setVisible(false);
 		    btnEditCourse.setVisible(false);
 		    btnDltCourse.setVisible(false);
+		    
+		    btnNewButton_1_1.setVisible(false);
 		}
 		
 		if("Teacher".equals(role)) {
 			btnNewButton_1.setVisible(true);
 		}else {
 			btnNewButton_1.setVisible(false);
+		}
+		
+		if("Student".equals(role)) {
+			btnNewButton_2.setVisible(true);
+		}else {
+			btnNewButton_2.setVisible(false);
 		}
 		
 		

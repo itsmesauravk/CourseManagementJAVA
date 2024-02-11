@@ -65,6 +65,8 @@ public class StudentDelete extends JFrame {
 	        e.printStackTrace();
 	    }
 	}
+	
+	
 
 
 	/**

@@ -83,7 +83,6 @@ public class UserLogin extends JFrame {
 		return userEmail;
 	}
 	
-	
 	public UserLogin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 745, 518);
