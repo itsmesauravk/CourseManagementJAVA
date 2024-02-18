@@ -46,26 +46,7 @@ public class StudentDelete extends JFrame {
 	String dbUsername = "root";
 	String dbPassword = "";
 	
-//	public void deleteStudentData(int studentId) {
-//	    try (Connection connection = DriverManager.getConnection(url, dbUsername, dbPassword);
-//	            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM users WHERE id = ?")) {
-//
-//	        preparedStatement.setInt(1, studentId);
-//	        int rowsAffected = preparedStatement.executeUpdate();
-//
-//	        if (rowsAffected > 0) {
-//	            System.out.println("Student deleted successfully!");
-////	            JOptionPane.showMessageDialog(null, "Course Deleted Sucessfully");
-//	        } else {
-//	            System.out.println("Student not found with ID: ");
-////	            JOptionPane.showMessageDialog(null, "Course not deleted");
-//	        }
-//
-//	    } catch (SQLException e) {
-//	        e.printStackTrace();
-//	    }
-//	}
-//	
+
 	public void deleteStudentData(int userId) {
 	    try (Connection connection = DriverManager.getConnection(url, dbUsername, dbPassword)) {
 	        // First, delete rows in the 'results' table referencing the user

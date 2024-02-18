@@ -36,7 +36,7 @@ public class StudentAdd extends JFrame {
 	private JTextField email;
 	private JPasswordField password;
 	private JComboBox level;
-	private JComboBox course;
+	private JComboBox course ;
 
 	/**
 	 * Launch the application.

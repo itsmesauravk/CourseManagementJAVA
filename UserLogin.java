@@ -53,6 +53,7 @@ public class UserLogin extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * 
 	 */
 	private boolean checkLogin(String username, String password) {
         String url = "jdbc:mysql://localhost:3306/CMS";
@@ -77,6 +78,7 @@ public class UserLogin extends JFrame {
 	
 	//encapsulation
 	
+	
 	private String userEmail;
 	
 	public String getUserEmail() {
@@ -100,13 +102,13 @@ public class UserLogin extends JFrame {
 		contentPane.add(lblLogin);
 		
 		JLabel lblEmail = new JLabel("Email :");
-		lblEmail.setForeground(new Color(165, 29, 45));
+		lblEmail.setForeground(new Color(26, 95, 180));
 		lblEmail.setBounds(166, 127, 88, 35);
 		lblEmail.setFont(new Font("Dyuthi", Font.BOLD, 22));
 		contentPane.add(lblEmail);
 		
 		JLabel lblPassword = new JLabel("Password :");
-		lblPassword.setForeground(new Color(165, 29, 45));
+		lblPassword.setForeground(new Color(26, 95, 180));
 		lblPassword.setBounds(166, 184, 127, 35);
 		lblPassword.setFont(new Font("Dyuthi", Font.BOLD, 20));
 		contentPane.add(lblPassword);
@@ -130,6 +132,8 @@ public class UserLogin extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String emailLogin = emailField.getText();
 				String passwordLogin = passwordField.getText();
+				
+				
 				if(checkLogin(emailLogin,passwordLogin)) {
 					JOptionPane.showMessageDialog(null,"Login succesFul.");
 					userEmail = emailLogin;
@@ -139,7 +143,6 @@ public class UserLogin extends JFrame {
 				}else {
 					JOptionPane.showMessageDialog(null,"Unable to login.");
 				}
-			
 			}
 		});
 		btnLogin.setFont(new Font("Dyuthi", Font.BOLD, 20));
@@ -152,7 +155,7 @@ public class UserLogin extends JFrame {
 		contentPane.add(lblCreateANew);
 		
 		JButton btnNewButton = new JButton("Register");
-		btnNewButton.setForeground(new Color(229, 165, 10));
+		btnNewButton.setForeground(new Color(0, 0, 0));
 		btnNewButton.setBackground(new Color(28, 113, 216));
 		btnNewButton.setBounds(338, 344, 117, 25);
 		btnNewButton.addActionListener(new ActionListener() {

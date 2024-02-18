@@ -225,10 +225,8 @@ public class Register extends JFrame {
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Inputs cannot be empty !!");
-                }
-
-				
-				}
+                }		
+			}
 			
 		});
 		registerBtn.setBounds(278, 387, 130, 35);

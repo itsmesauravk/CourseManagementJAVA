@@ -115,7 +115,7 @@ public class Dashboard extends JFrame {
     private JTextField textField_3;
 	
 	public Map<String, String> getUserData(String userEmail) {
-        Map<String, String> userData = new HashMap<>();
+        Map<String, String> userData = new HashMap<>();	
 
         try (Connection connection = DriverManager.getConnection(url, dbUsername, dbPassword);
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE email = ?")) {
@@ -287,7 +287,7 @@ public class Dashboard extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(173, 0, 516, 582);
+		tabbedPane.setBounds(173, -25, 516, 607);
 		contentPane.add(tabbedPane);
 		
 		JPanel panel_2 = new JPanel();
@@ -295,14 +295,14 @@ public class Dashboard extends JFrame {
 		panel_2.setLayout(null);
 		
 		JLabel lblTab_2 = new JLabel("DashBoard");
-		lblTab_2.setFont(new Font("Dyuthi", Font.BOLD, 30));
 		lblTab_2.setBounds(12, 0, 163, 53);
+		lblTab_2.setFont(new Font("Dyuthi", Font.BOLD, 30));
 		panel_2.add(lblTab_2);
 		
 		JLabel lblNewLabel = new JLabel(firstname);
+		lblNewLabel.setBounds(369, 11, 130, 33);
 		lblNewLabel.setForeground(new Color(26, 95, 180));
 		lblNewLabel.setFont(new Font("FreeMono", Font.BOLD, 24));
-		lblNewLabel.setBounds(369, 11, 130, 33);
 		panel_2.add(lblNewLabel);
 		
 		JLabel lblWelcome = new JLabel("Welcome,");
@@ -310,8 +310,8 @@ public class Dashboard extends JFrame {
 		panel_2.add(lblWelcome);
 		
 		JPanel panel_7 = new JPanel();
-		panel_7.setBackground(new Color(98, 160, 234));
 		panel_7.setBounds(23, 79, 130, 113);
+		panel_7.setBackground(new Color(98, 160, 234));
 		panel_2.add(panel_7);
 		panel_7.setLayout(null);
 		
@@ -326,8 +326,8 @@ public class Dashboard extends JFrame {
 		panel_7.add(label_1);
 		
 		JPanel panel_7_1 = new JPanel();
-		panel_7_1.setBackground(new Color(255, 163, 72));
 		panel_7_1.setBounds(182, 79, 123, 113);
+		panel_7_1.setBackground(new Color(255, 163, 72));
 		panel_2.add(panel_7_1);
 		panel_7_1.setLayout(null);
 		
@@ -342,8 +342,8 @@ public class Dashboard extends JFrame {
 		panel_7_1.add(label_1_1);
 		
 		JPanel panel_7_2 = new JPanel();
-		panel_7_2.setBackground(new Color(192, 97, 203));
 		panel_7_2.setBounds(333, 79, 123, 113);
+		panel_7_2.setBackground(new Color(192, 97, 203));
 		panel_2.add(panel_7_2);
 		panel_7_2.setLayout(null);
 		
@@ -358,9 +358,9 @@ public class Dashboard extends JFrame {
 		panel_7_2.add(label_1_2);
 		
 		JPanel panel_7_3 = new JPanel();
+		panel_7_3.setBounds(23, 227, 130, 113);
 		panel_7_3.setLayout(null);
 		panel_7_3.setBackground(new Color(143, 240, 164));
-		panel_7_3.setBounds(23, 227, 130, 113);
 		panel_2.add(panel_7_3);
 		
 		JLabel lblAdmin_1 = new JLabel("Courses");
@@ -374,8 +374,8 @@ public class Dashboard extends JFrame {
 		panel_7_3.add(label_1_3);
 		
 		JPanel panel_16 = new JPanel();
-		panel_16.setBackground(new Color(192, 191, 188));
 		panel_16.setBounds(280, 12, 208, 41);
+		panel_16.setBackground(new Color(192, 191, 188));
 		panel_2.add(panel_16);
 		
 		JLabel label_4 = new JLabel("");
